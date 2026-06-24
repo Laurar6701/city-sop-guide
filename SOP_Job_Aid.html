@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP Quick Reference | CITY HOME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #111111;
+    --red: #CC0000;
+    --red-dark: #990000;
+    --red-light: #FAEAEA;
+    --red-mid: #E8B3B3;
+    --white: #FFFFFF;
+    --gray-50: #F7F7F7;
+    --gray-100: #EFEFEF;
+    --gray-200: #DDDDDD;
+    --gray-400: #999999;
+    --gray-600: #555555;
+    --gray-800: #2A2A2A;
+    --warn-bg: #FFF8E6;
+    --warn-border: #F0C040;
+    --warn-text: #7A5200;
+    --step-num: #CC0000;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gray-50);
+    color: var(--black);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--black);
+    padding: 0 40px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-header .logo img {
+    height: 28px;
+    width: auto;
+    filter: invert(1) brightness(2);
+  }
+  .header-badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-400);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--black);
+    padding: 48px 40px 40px;
+    border-bottom: 3px solid var(--red);
+  }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: var(--red); }
+  .hero p {
+    font-size: 15px;
+    color: var(--gray-400);
+    max-width: 560px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV TABS ── */
+  .tab-nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 16px 20px 13px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-600);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-btn:hover { color: var(--black); }
+  .tab-btn.active {
+    color: var(--red);
+    border-bottom-color: var(--red);
+    font-weight: 600;
+  }
+
+  /* ── MAIN ── */
+  .main { max-width: 860px; margin: 0 auto; padding: 40px; }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION LABEL ── */
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .section-desc {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 28px;
+    max-width: 600px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon {
+    width: 28px;
+    height: 28px;
+    background: var(--red-light);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-title .icon svg { width: 15px; height: 15px; stroke: var(--red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .card-body { font-size: 13px; color: var(--gray-600); line-height: 1.65; margin-top: 10px; }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .step-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--black);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-connector {
+    width: 2px;
+    flex: 1;
+    background: var(--gray-200);
+    min-height: 24px;
+    margin-top: 4px;
+  }
+  .step:last-child .step-connector { display: none; }
+  .step-content {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .step-content h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .step-content p, .step-content li {
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.65;
+  }
+  .step-content ul { padding-left: 16px; margin-top: 6px; }
+  .step-content li { margin-bottom: 4px; }
+
+  /* ── NAMING BUILDER ── */
+  .naming-builder {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .naming-formula {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    background: var(--black);
+    border-radius: 8px;
+  }
+  .formula-part {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+  .formula-sep {
+    color: var(--gray-400);
+    font-size: 18px;
+    font-weight: 300;
+  }
+  .fp-dept { background: var(--red); color: var(--white); }
+  .fp-fn   { background: #444; color: var(--white); }
+  .fp-proc { background: #666; color: var(--white); }
+  .fp-rev  { background: #888; color: var(--white); }
+
+  .naming-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .naming-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-600);
+    margin-bottom: 5px;
+  }
+  .naming-field input, .naming-field select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--black);
+    background: var(--gray-50);
+  }
+  .naming-field input:focus, .naming-field select:focus {
+    outline: none;
+    border-color: var(--red);
+    background: var(--white);
+  }
+  .name-output {
+    background: var(--gray-50);
+    border: 1.5px dashed var(--gray-300, #ccc);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .name-output-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-400);
+    margin-bottom: 4px;
+  }
+  .name-output-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--black);
+    word-break: break-all;
+    min-height: 22px;
+  }
+  .name-empty { color: var(--gray-400); font-style: italic; font-weight: 400; }
+
+  /* ── DEPT CODE GRID ── */
+  .code-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .code-chip {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.1s, border-color 0.1s;
+  }
+  .code-chip strong { display: block; font-size: 11px; font-weight: 700; color: var(--black); }
+  .code-chip span { font-size: 11px; color: var(--gray-600); }
+  .code-chip:hover { background: var(--red-light); border-color: var(--red-mid); }
+  .code-chip.selected { background: var(--red-light); border-color: var(--red); }
+  .code-chip.selected strong { color: var(--red-dark); }
+
+  /* ── CHECKLIST ── */
+  .checklist { display: flex; flex-direction: column; gap: 8px; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .check-item:hover { background: var(--gray-50); }
+  .check-item.done { background: #F4FBF4; border-color: #B8DFB8; }
+  .check-box {
+    width: 20px; height: 20px;
+    border-radius: 4px;
+    border: 2px solid var(--gray-300, #ccc);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .check-item.done .check-box { background: #2E7D2E; border-color: #2E7D2E; }
+  .check-box svg { width: 12px; height: 12px; stroke: white; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transition: opacity 0.15s; }
+  .check-item.done .check-box svg { opacity: 1; }
+  .check-text { flex: 1; }
+  .check-text strong { display: block; font-size: 13px; font-weight: 600; color: var(--black); margin-bottom: 2px; }
+  .check-text span { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+  /* ── WARNING BANNER ── */
+  .warn-banner {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-left: 4px solid var(--warn-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .warn-banner svg { width: 18px; height: 18px; stroke: #C08000; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 1px; }
+  .warn-banner p { font-size: 13px; color: var(--warn-text); line-height: 1.6; }
+  .warn-banner strong { font-weight: 700; }
+
+  /* ── LINK BUTTON ── */
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--black);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 7px;
+    transition: background 0.15s;
+    margin-top: 12px;
+  }
+  .link-btn:hover { background: var(--red); }
+  .link-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .link-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: none;
+    color: var(--red);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border: 1.5px solid var(--red);
+    border-radius: 7px;
+    transition: background 0.15s;
+    margin-top: 12px;
+    margin-left: 8px;
+  }
+  .link-btn-ghost:hover { background: var(--red-light); }
+  .link-btn-ghost svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ── PILL ── */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-left: 8px;
+  }
+  .pill-red { background: var(--red-light); color: var(--red-dark); }
+  .pill-gray { background: var(--gray-100); color: var(--gray-600); }
+  .pill-green { background: #E6F5E6; color: #1D6B1D; }
+
+  /* ── AI TIP BOX ── */
+  .ai-tip {
+    background: var(--black);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .ai-tip-icon {
+    width: 36px; height: 36px;
+    background: var(--red);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ai-tip-icon svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ai-tip h4 { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  .ai-tip p { font-size: 13px; color: #AAAAAA; line-height: 1.6; }
+  .ai-tip a { color: var(--red); font-weight: 600; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--gray-200); margin: 28px 0; }
+
+  /* ── GRID 2 ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } .naming-fields { grid-template-columns: 1fr; } }
+
+  /* ── QUICK LINK ROW ── */
+  .quick-links { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+  .ql {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+    flex: 1;
+    min-width: 200px;
+  }
+  .ql:hover { border-color: var(--red); background: var(--red-light); }
+  .ql-icon {
+    width: 32px; height: 32px;
+    background: var(--black);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ql-icon svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ql-text strong { display: block; font-size: 13px; font-weight: 700; color: var(--black); }
+  .ql-text span { font-size: 11px; color: var(--gray-600); }
+
+  /* ── REVISION BADGE ── */
+  .rev-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
+  .rev-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-400); background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
+  .rev-table td { padding: 10px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-800); vertical-align: top; }
+  .rev-table tr:last-child td { border-bottom: none; }
+  .rev-badge {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .rev-rough { background: var(--warn-bg); color: #7A5200; }
+  .rev-final { background: #E6F5E6; color: #1D6B1D; }
+
+  /* ── AI FUNCTION SUGGESTER ── */
+  .fn-suggester {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
+  .fn-suggester-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .fn-suggester-header .ai-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--black);
+    color: var(--white);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .fn-suggester-header span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .fn-input-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .fn-input-row textarea {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--black);
+    background: var(--gray-50);
+    resize: none;
+    height: 60px;
+    line-height: 1.5;
+  }
+  .fn-input-row textarea:focus { outline: none; border-color: var(--red); background: var(--white); }
+  .fn-suggest-btn {
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    padding: 0 16px;
+    height: 60px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+  .fn-suggest-btn:hover { background: var(--red); }
+  .fn-suggest-btn:disabled { background: var(--gray-400); cursor: not-allowed; }
+  .fn-results {
+    margin-top: 12px;
+    display: none;
+  }
+  .fn-results.visible { display: block; }
+  .fn-results-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-400);
+    margin-bottom: 8px;
+  }
+  .fn-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .fn-chip {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+    cursor: pointer;
+    transition: background 0.1s, border-color 0.1s;
+  }
+  .fn-chip:hover { background: var(--red-light); border-color: var(--red); color: var(--red-dark); }
+  .fn-chip.selected { background: var(--red-light); border-color: var(--red); color: var(--red-dark); }
+  .fn-loading {
+    font-size: 13px;
+    color: var(--gray-400);
+    font-style: italic;
+    padding: 8px 0;
+    display: none;
+  }
+  .fn-loading.visible { display: block; }
+  .fn-error {
+    font-size: 12px;
+    color: #990000;
+    padding: 8px 0;
+    display: none;
+  }
+  .fn-error.visible { display: block; }
+
+  /* progress bar */
+  .progress-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .progress-bar { flex: 1; height: 5px; background: var(--gray-200); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--red); border-radius: 99px; transition: width 0.3s; }
+  .progress-label { font-size: 12px; font-weight: 600; color: var(--gray-600); white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo"><img src="data:image/png;base64,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" alt="CITY HOME" style="height:28px;width:auto;filter:invert(1) brightness(2);" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'inline\'"><span style="display:none;font-size:18px;font-weight:700;color:#fff;letter-spacing:0.08em;">CITY HOME</span></div>
+  <div class="header-badge">SOP Quick Reference</div>
+</header>
+
+<div class="hero">
+  <h1>SOP Author<br><span>Quick Reference Guide</span></h1>
+  <p>Everything you need to name, build, submit, and find Standard Operating Procedures — in one place.</p>
+</div>
+
+<nav class="tab-nav" role="tablist" aria-label="SOP guide sections">
+  <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab(this,'tab-name')">📝 Naming</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab(this,'tab-build')">🔨 Building</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab(this,'tab-publish')">🚀 Publishing</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab(this,'tab-find')">🔍 Finding SOPs</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab(this,'tab-archive')">⚠️ Archived SOPs</button>
+</nav>
+
+<main class="main">
+
+  <!-- ══════════════════════════════════ TAB 1: NAMING ══════════════════════════════════ -->
+  <section id="tab-name" class="tab-panel active" role="tabpanel">
+    <div class="section-eyebrow">Step 1 of 4</div>
+    <h2 class="section-title">SOP naming convention</h2>
+    <p class="section-desc">Every SOP file must follow this exact format. Use the builder below to generate your file name before saving.</p>
+
+    <div class="naming-builder">
+      <div class="naming-formula">
+        <span class="formula-part fp-dept">Dept Code</span>
+        <span class="formula-sep">–</span>
+        <span class="formula-part fp-fn">Function</span>
+        <span class="formula-sep">–</span>
+        <span class="formula-part fp-proc">Procedure Name</span>
+        <span class="formula-sep">–</span>
+        <span class="formula-part fp-rev">Rev #</span>
+      </div>
+
+      <div class="naming-fields">
+        <div class="naming-field">
+          <label for="f-dept">Department code</label>
+          <select id="f-dept" onchange="buildName()">
+            <option value="">— select —</option>
+            <option>AC</option><option>AD</option><option>AP</option><option>CC</option>
+            <option>CO</option><option>CS</option><option>DA</option><option>DL</option>
+            <option>DP</option><option>FCST</option><option>FE</option><option>GE</option>
+            <option>INFRA</option><option>KC</option><option>LE</option><option>LIT</option>
+            <option>MERCH</option><option>MKT</option><option>OSM</option>
+            <option>P&amp;OE</option><option>PE</option><option>PO</option>
+            <option>QA</option><option>RE</option><option>RISK</option><option>SA</option>
+            <option>SE</option><option>SL</option><option>TA</option><option>TECH</option>
+            <option>TS</option><option>WA</option>
+          </select>
+        </div>
+        <div class="naming-field">
+          <label for="f-fn">Function (1–2 words)</label>
+          <input id="f-fn" type="text" placeholder="e.g. Document Control" oninput="buildName()">
+          <div class="fn-suggester" style="margin-top:10px;">
+            <div class="fn-suggester-header">
+              <span class="ai-badge">AI</span>
+              <span>Not sure what to call your function? Describe your process.</span>
+            </div>
+            <div class="fn-input-row">
+              <textarea id="fn-describe" placeholder="e.g. I'm writing an SOP for how we onboard new vendors in the purchasing team"></textarea>
+              <button class="fn-suggest-btn" onclick="suggestFunction()" id="fn-btn">Suggest →</button>
+            </div>
+            <div class="fn-loading" id="fn-loading">Generating suggestions...</div>
+            <div class="fn-error" id="fn-error"></div>
+            <div class="fn-results" id="fn-results">
+              <div class="fn-results-label">Suggested function names — click one to use it</div>
+              <div class="fn-chips" id="fn-chips"></div>
+              <p style="font-size:11px;color:var(--gray-400);margin-top:4px;">Suggestions follow the 1–2 word rule. Pick the one that best fits, or edit it.</p>
+            </div>
+          </div>
+        </div>
+        <div class="naming-field">
+          <label for="f-proc">Procedure name</label>
+          <input id="f-proc" type="text" placeholder="e.g. Creating and Publishing an SOP" oninput="buildName()">
+        </div>
+        <div class="naming-field">
+          <label for="f-rev">Revision</label>
+          <select id="f-rev" onchange="buildName()">
+            <option value="RevROUGH">RevROUGH — in progress / not yet approved</option>
+            <option value="Rev1">Rev1</option><option value="Rev2">Rev2</option>
+            <option value="Rev3">Rev3</option><option value="Rev4">Rev4</option>
+            <option value="Rev5">Rev5</option><option value="Rev6">Rev6</option>
+            <option value="Rev7">Rev7</option><option value="Rev8">Rev8</option>
+            <option value="Rev9">Rev9</option><option value="Rev10">Rev10</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="name-output">
+        <div class="name-output-label">Your file name</div>
+        <div class="name-output-value" id="name-result"><span class="name-empty">Fill in the fields above to generate your file name</span></div>
+      </div>
+    </div>
+
+    <div class="warn-banner">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>Revision rule:</strong> While writing or editing, always name the file <strong>RevROUGH</strong>. Once approved, rename it to the next revision number (e.g. Rev3). Never skip revision numbers. Never use decimals like Rev3.5.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        Function naming rules
+      </div>
+      <div class="card-body">
+        <ul style="padding-left: 16px;">
+          <li>Use <strong>1–2 words maximum</strong> — clear and easy to understand across departments.</li>
+          <li>Avoid abbreviations unless widely recognized company-wide (e.g. CFOS, SHRM).</li>
+          <li>The function groups related processes — it is not the specific task itself.</li>
+          <li>Department leaders may create new function names as needed. Keep them clear and reusable.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ TAB 2: BUILDING ══════════════════════════════════ -->
+  <section id="tab-build" class="tab-panel" role="tabpanel">
+    <div class="section-eyebrow">Step 2 of 4</div>
+    <h2 class="section-title">Building an SOP</h2>
+    <p class="section-desc">Follow these steps in order. All draft work happens in the <strong>Drafts (In-Progress)</strong> folder — never in the published library.</p>
+
+    <div class="ai-tip">
+      <div class="ai-tip-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 110 20A10 10 0 0112 2z"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div>
+        <h4>Write faster with Claude AI</h4>
+        <p>CITY HOME's Claude Enterprise workspace can help you draft SOP content. Open <a href="https://claude.ai" target="_blank">claude.ai</a> in your browser, describe the process you're documenting, and use the output as a starting point — then paste it into your SOP template. Always review and edit AI output before submitting for publication.</p>
+      </div>
+    </div>
+
+    <div class="quick-links">
+      <a class="ql" href="https://cityfurniture6701.sharepoint.com/:f:/r/sites/city-docmgmtdraft/ControlledDocuments/Templates?csf=1&web=1&e=fdN4AJ" target="_blank">
+        <div class="ql-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="ql-text"><strong>SOP Templates folder</strong><span>Start here — copy before editing</span></div>
+      </a>
+      <a class="ql" href="https://cityfurniture6701.sharepoint.com/:u:/r/sites/city-docmgmtdraft/SitePages/Home.aspx?csf=1&web=1&share=IQATJFWVin_TQpDPp19CIqBSAcmdbB_arPLf1TJlfcaphJU&e=d1ejhu" target="_blank">
+        <div class="ql-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div>
+        <div class="ql-text"><strong>Draft SOPs folder</strong><span>SharePoint — where you work</span></div>
+      </a>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Get the SOP template</h4>
+          <p>Navigate to the Draft SOPs folder above. Go to <strong>Document Management → SOPs (Rough Draft) → Draft SOPs → Templates</strong> and copy the template file.</p>
+          <ul>
+            <li><strong>Windows Explorer:</strong> Right-click → Copy → navigate to your department's Drafts (In-Progress) folder → Right-click → Paste.</li>
+            <li><strong>SharePoint web:</strong> Right-click → Copy to → navigate to your department's Drafts (In-Progress) folder → Copy here.</li>
+          </ul>
+          <p style="margin-top:8px;">If you are revising an existing SOP, copy it from <strong>Drafts (Release)</strong> into <strong>Drafts (In-Progress)</strong> instead.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Rename the file</h4>
+          <p>Before you start writing, rename the file following the <strong>SOP Naming Convention</strong> (see the Naming tab). Use <strong>RevROUGH</strong> as the revision until it is approved.</p>
+          <p style="margin-top:6px;">Example: <code style="background: var(--gray-100); padding: 2px 6px; border-radius: 4px; font-size: 12px;">AD – Document Control – Onboarding Process – RevROUGH</code></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Fill in the header</h4>
+          <p>Complete every field in the SOP header box:</p>
+          <ul>
+            <li><strong>Department</strong> — use your approved department code.</li>
+            <li><strong>Function</strong> — 1–2 word category.</li>
+            <li><strong>Date Issued</strong> — leave <em>blank</em> while the SOP is in draft.</li>
+            <li><strong>Procedure (Name)</strong> — under 8 words, precise enough for a reader to know what it covers at a glance.</li>
+            <li><strong>Procedure #</strong> — follows the naming convention.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Write the SOP content</h4>
+          <p>Follow these writing standards:</p>
+          <ul>
+            <li>Start each step with an action verb (e.g. Open, Select, Navigate, Complete).</li>
+            <li>Use present tense throughout — never past tense.</li>
+            <li>Spell out numbers (one, two, three — not 1, 2, 3).</li>
+            <li>No contractions — write "do not" not "don't."</li>
+            <li>Each section heading must use <strong>Heading 3</strong> style so it appears in the Table of Contents.</li>
+            <li>Direct all steps to one person — use role titles, never names.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"><div class="step-num">5</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Update the Table of Contents</h4>
+          <p>Right-click anywhere on the Table of Contents → <strong>Update Table</strong> → <strong>Update entire table</strong> → OK.</p>
+          <p style="margin-top:6px;">If unexpected items appear, find those paragraphs and change their style from "Heading 3" to <strong>Normal</strong>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"><div class="step-num">6</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Update the Revision History table</h4>
+          <p>At the bottom of the SOP, fill in the Revision History table with the date, revision number, a brief description of changes, and your initials. Revision numbers are always whole numbers starting at 1 — never skip numbers.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"><div class="step-num">7</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Final rename before submitting</h4>
+          <p>Once the SOP is approved by your leader, rename the file: change <strong>RevROUGH</strong> to the correct revision number (e.g. Rev3). Update the <strong>Date Issued</strong> in the header to today's date. Confirm the file name matches the Procedure # in the header exactly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ TAB 3: PUBLISHING ══════════════════════════════════ -->
+  <section id="tab-publish" class="tab-panel" role="tabpanel">
+    <div class="section-eyebrow">Step 3 of 4</div>
+    <h2 class="section-title">Submitting for publication</h2>
+    <p class="section-desc">Once your leader has approved the SOP, follow these steps to get it published. You do not publish it yourself — OSM publishes on your behalf.</p>
+
+    <div class="warn-banner">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>Review before you submit.</strong> Make sure your SOP has been reviewed with your leader and all applicable stakeholders before submitting. Once submitted, allow 2–3 business days for publication.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Review with your leader and stakeholders</h4>
+          <p>Do not submit until the SOP has been reviewed and approved by your direct leader and any other applicable stakeholders who own or perform the process.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Open the Publishing Request Form</h4>
+          <p>Click the button below to open the form. Complete all required fields.</p>
+          <a class="link-btn" href="https://forms.office.com/Pages/ResponsePage.aspx?id=RKZTdylq7UOm5bDYp1Wcl-dAn0xFTEFKpChcSAV1IgNUMVJHT1RRTjBXTFZGUEtEQVQ2VzJLSlA2OCQlQCN0PWcu" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            Open Publishing Request Form
+          </a>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Submit and wait</h4>
+          <p>After submitting, allow <strong>2–3 business days</strong> for the SOP to be published to the official library.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div>
+        <div class="step-content">
+          <h4>Submit UKG requests (if applicable)</h4>
+          <p>If the SOP requires any UKG updates (training, role assignments, etc.), submit those requests after the publication is approved. Allow a <strong>minimum of two weeks</strong> for UKG requests to be completed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ TAB 4: FINDING SOPS ══════════════════════════════════ -->
+  <section id="tab-find" class="tab-panel" role="tabpanel">
+    <div class="section-eyebrow">Step 4 of 4</div>
+    <h2 class="section-title">Finding published SOPs</h2>
+    <p class="section-desc">All approved, current SOPs live in one place. Always use this library — do not rely on saved copies, printed versions, or drafts you may have downloaded.</p>
+
+    <div class="card" style="border-left: 4px solid var(--red); border-radius: 0 10px 10px 0;">
+      <div class="card-title" style="font-size: 16px; margin-bottom: 10px;">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div>
+        Published SOP Library
+      </div>
+      <p style="font-size: 13px; color: var(--gray-600); line-height: 1.6; margin-bottom: 4px;">This is the only source of truth for current, approved SOPs. Bookmark this link and use it every time you need to reference a procedure.</p>
+      <a class="link-btn" href="https://cityfurniture6701.sharepoint.com/:u:/s/city-docmgmt/IQB_mU5x270CQrzoTfCvlQXUAUyJU8m6KYQKyjWQHLD1b-U?e=oYybe3" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Open Published SOP Library
+      </a>
+      <a class="link-btn-ghost" href="https://cityfurniture6701.sharepoint.com/:u:/r/sites/city-docmgmtdraft/SitePages/Home.aspx?csf=1&web=1&share=IQATJFWVin_TQpDPp19CIqBSAcmdbB_arPLf1TJlfcaphJU&e=d1ejhu" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+        Draft SOPs folder
+      </a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          How to search
+        </div>
+        <div class="card-body">Use the search bar in SharePoint to find SOPs by department code, function name, or key words in the procedure name. Results only show <strong>published</strong> documents in this library.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
+          Reading the revision number
+        </div>
+        <div class="card-body">The file name always ends in a revision number (e.g. <strong>Rev5</strong>). The highest number is always the most current. If you have a printed or downloaded copy, verify its revision matches the library before using it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ TAB 5: ARCHIVE ══════════════════════════════════ -->
+  <section id="tab-archive" class="tab-panel" role="tabpanel">
+    <div class="section-eyebrow">Important</div>
+    <h2 class="section-title">Avoid using archived SOPs</h2>
+    <p class="section-desc">Archived SOPs are outdated versions that have been replaced. Using them can lead to errors, compliance issues, and inconsistent practices across teams.</p>
+
+    <div class="warn-banner" style="border-left-color: #CC0000; border-color: #F0B0B0; background: #FFF0F0;">
+      <svg viewBox="0 0 24 24" style="stroke: #CC0000;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p style="color: #7A0000;"><strong>Never use a document labeled "Archive" or "RevROUGH" to perform or reference a process.</strong> These are not current versions and may contain outdated or incorrect information.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        How to verify you have the current version
+      </div>
+      <div class="card-body">
+        <ul style="padding-left: 16px;">
+          <li>Always access SOPs directly from the <strong>Published SOP Library</strong> (see the Finding SOPs tab).</li>
+          <li>Check the file name — the revision number at the end (e.g. Rev5) should match the highest revision in the library for that SOP.</li>
+          <li>If you have a printed copy, compare its revision number to the current version in the library before using it.</li>
+          <li>If you are unsure whether a version is current, do not use it — open the library and download a fresh copy.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        What to do if you find an archived SOP being used
+      </div>
+      <div class="card-body">
+        <ul style="padding-left: 16px;">
+          <li>Do not distribute or act on it.</li>
+          <li>Locate the current version in the Published SOP Library and share that link instead.</li>
+          <li>Notify the SOP owner or your department leader so the archived copy can be removed or corrected.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Revision status at a glance</h3>
+
+    <table class="rev-table">
+      <thead>
+        <tr><th>Label in file name</th><th>Meaning</th><th>Safe to use?</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rev-badge rev-rough">RevROUGH</span></td>
+          <td>Draft in progress — not yet approved</td>
+          <td style="color: #CC0000; font-weight: 600;">No — draft only</td>
+        </tr>
+        <tr>
+          <td><span class="rev-badge rev-final">Rev1, Rev2… Rev<em>n</em></span></td>
+          <td>Approved and published revision</td>
+          <td style="color: #1D6B1D; font-weight: 600;">Yes — if it is the highest number in the library</td>
+        </tr>
+        <tr>
+          <td><span class="rev-badge" style="background: var(--gray-100); color: var(--gray-600);">Archive</span></td>
+          <td>Superseded by a newer revision</td>
+          <td style="color: #CC0000; font-weight: 600;">No — outdated</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<script>
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
+  document.getElementById(panelId).classList.add('active');
+}
+
+function buildName() {
+  const dept = document.getElementById('f-dept').value.trim();
+  const fn   = document.getElementById('f-fn').value.trim();
+  const proc = document.getElementById('f-proc').value.trim();
+  const rev  = document.getElementById('f-rev').value;
+  const el   = document.getElementById('name-result');
+  if (!dept && !fn && !proc) {
+    el.innerHTML = '<span class="name-empty">Fill in the fields above to generate your file name</span>';
+    return;
+  }
+  const parts = [dept, fn, proc, rev].filter(Boolean);
+  el.textContent = parts.join(' – ');
+}
+
+async function suggestFunction() {
+  const desc = document.getElementById('fn-describe').value.trim();
+  if (!desc) { return; }
+
+  const btn = document.getElementById('fn-btn');
+  const loading = document.getElementById('fn-loading');
+  const error = document.getElementById('fn-error');
+  const results = document.getElementById('fn-results');
+  const chips = document.getElementById('fn-chips');
+
+  btn.disabled = true;
+  btn.textContent = '...';
+  loading.classList.add('visible');
+  error.classList.remove('visible');
+  results.classList.remove('visible');
+  chips.innerHTML = '';
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        system: `You are a CITY HOME (CITY Furniture) SOP naming assistant. Your only job is to suggest Function names for SOP file naming conventions. The Function must be 1-2 words maximum that broadly categorize a business area. Examples: "Document Control", "Onboarding", "Receiving", "Payroll", "Recruiting", "Safety", "Training". Return ONLY a JSON array of 4 suggested function names, nothing else. No explanation, no preamble, no markdown. Example output: ["Document Control","Vendor Management","Procurement","Contracts"]`,
+        messages: [{ role: 'user', content: `Suggest 4 function names for this SOP: ${desc}` }]
+      })
+    });
+
+    const data = await resp.json();
+    const text = data.content?.[0]?.text || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const suggestions = JSON.parse(clean);
+
+    if (!Array.isArray(suggestions) || suggestions.length === 0) throw new Error('No suggestions returned');
+
+    suggestions.forEach(s => {
+      const chip = document.createElement('button');
+      chip.className = 'fn-chip';
+      chip.textContent = s;
+      chip.onclick = () => {
+        document.querySelectorAll('.fn-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        document.getElementById('f-fn').value = s;
+        buildName();
+      };
+      chips.appendChild(chip);
+    });
+
+    results.classList.add('visible');
+  } catch (e) {
+    error.textContent = 'Could not generate suggestions. Type your function name manually above.';
+    error.classList.add('visible');
+  } finally {
+    loading.classList.remove('visible');
+    btn.disabled = false;
+    btn.textContent = 'Suggest →';
+  }
+}
+</script>
+</body>
+</html>
