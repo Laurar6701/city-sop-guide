@@ -677,24 +677,11 @@
         </div>
         <div class="naming-field">
           <label for="f-fn">Function (1–2 words)</label>
-          <input id="f-fn" type="text" placeholder="e.g. Document Control" oninput="buildName()">
-          <div class="fn-suggester" style="margin-top:10px;">
-            <div class="fn-suggester-header">
-              <span class="ai-badge">AI</span>
-              <span>Not sure what to call your function? Describe your process.</span>
-            </div>
-            <div class="fn-input-row">
-              <textarea id="fn-describe" placeholder="e.g. I'm writing an SOP for how we onboard new vendors in the purchasing team"></textarea>
-              <button class="fn-suggest-btn" onclick="suggestFunction()" id="fn-btn">Suggest →</button>
-            </div>
-            <div class="fn-loading" id="fn-loading">Generating suggestions...</div>
-            <div class="fn-error" id="fn-error"></div>
-            <div class="fn-results" id="fn-results">
-              <div class="fn-results-label">Suggested function names — click one to use it</div>
-              <div class="fn-chips" id="fn-chips"></div>
-              <p style="font-size:11px;color:var(--gray-400);margin-top:4px;">Suggestions follow the 1–2 word rule. Pick the one that best fits, or edit it.</p>
-            </div>
-          </div>
+          <input id="f-fn" type="text" placeholder="Type or pick from the list…" list="fn-list" oninput="buildName()" autocomplete="off">
+          <datalist id="fn-list">
+            <option>5S</option><option>Accounting</option><option>Accounts Payable</option><option>Administration</option><option>AS400 Support</option><option>Asset Protection</option><option>Associate Relations</option><option>Benefits & Wellness</option><option>Brand</option><option>Buying Office</option><option>CFOS</option><option>Chair Assembly</option><option>CITY Interiors</option><option>CITY Moves</option><option>Clearance</option><option>Closet & Appliances</option><option>Communications</option><option>Community Relations</option><option>Construction</option><option>Contract Ops</option><option>Contract Review</option><option>Contract Sales</option><option>Contracts</option><option>Corporate</option><option>Creative</option><option>Customer</option><option>Customer Care</option><option>Customer Experience</option><option>Customer Support</option><option>Customer Transactions</option><option>Cyber Security</option><option>Cycle Count</option><option>Daily Management</option><option>DC Maintenance</option><option>Delivery</option><option>Demand Planning</option><option>Design</option><option>Design & Installation</option><option>Development</option><option>Digital Marketing</option><option>Document Control</option><option>Document Retention</option><option>Domestic</option><option>eCommerce</option><option>Email</option><option>Export</option><option>Exterior</option><option>Finance</option><option>Fleet Maintenance</option><option>General</option><option>General Ledger</option><option>Help Desk</option><option>Hoshin</option><option>HR Operations</option><option>HRD</option><option>Hurricane Response</option><option>HVAC</option><option>Infrastructure</option><option>Interior</option><option>Inventory Control</option><option>Inventory Transfer</option><option>Kaizen</option><option>KC Accounting</option><option>KC Café</option><option>Legal</option><option>Lighting</option><option>Litigation</option><option>Logistics</option><option>Management System</option><option>Marketing</option><option>Merch Planning</option><option>Merch Returns</option><option>Merchandising</option><option>Negotiated Savings</option><option>Office Maintenance</option><option>Operations</option><option>OSM</option><option>Parts Quality</option><option>Payroll</option><option>People</option><option>People Services</option><option>Photo Studio</option><option>Problem Solving</option><option>Procurement</option><option>Product Office</option><option>Profit Sharing</option><option>Project Management</option><option>Quality Assurance</option><option>Receiving</option><option>Recognition</option><option>Recruiting</option><option>Recycle</option><option>Repair Center</option><option>Restricted Duty</option><option>Retail Enablement</option><option>Risk Management</option><option>Routing</option><option>Safety</option><option>Sales</option><option>Sample Process</option><option>Scrum</option><option>Security</option><option>Senior Leadership</option><option>SEO</option><option>Shared Services</option><option>SHRM After-Sale</option><option>SHRM Maintenance</option><option>SHRM Management</option><option>SHRM non-selling</option><option>SHRM Pre-Sale</option><option>SHRM Selling</option><option>Smart Home</option><option>Social</option><option>Software Engineering</option><option>Staging</option><option>Strategic and Hoshin</option><option>Supply Chain</option><option>Technology</option><option>Total Rewards</option><option>Training</option><option>Utilities</option><option>Visual Management</option><option>Visual Merchandising</option><option>Warehouse</option><option>Warranty</option><option>Westside DC</option>
+          </datalist>
+          <p style="font-size:11px;color:var(--gray-400);margin-top:5px;">Choose from approved names or type your own.</p>
         </div>
         <div class="naming-field">
           <label for="f-proc">Procedure name</label>
@@ -1004,7 +991,6 @@
 </main>
 
 <script>
-function switchTab(btn, panelId) {
   document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
@@ -1026,65 +1012,7 @@ function buildName() {
   el.textContent = parts.join(' – ');
 }
 
-async function suggestFunction() {
-  const desc = document.getElementById('fn-describe').value.trim();
-  if (!desc) { return; }
 
-  const btn = document.getElementById('fn-btn');
-  const loading = document.getElementById('fn-loading');
-  const error = document.getElementById('fn-error');
-  const results = document.getElementById('fn-results');
-  const chips = document.getElementById('fn-chips');
-
-  btn.disabled = true;
-  btn.textContent = '...';
-  loading.classList.add('visible');
-  error.classList.remove('visible');
-  results.classList.remove('visible');
-  chips.innerHTML = '';
-
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
-        system: `You are a CITY HOME (CITY Furniture) SOP naming assistant. Your only job is to suggest Function names for SOP file naming conventions. The Function must be 1-2 words maximum that broadly categorize a business area. Examples: "Document Control", "Onboarding", "Receiving", "Payroll", "Recruiting", "Safety", "Training". Return ONLY a JSON array of 4 suggested function names, nothing else. No explanation, no preamble, no markdown. Example output: ["Document Control","Vendor Management","Procurement","Contracts"]`,
-        messages: [{ role: 'user', content: `Suggest 4 function names for this SOP: ${desc}` }]
-      })
-    });
-
-    const data = await resp.json();
-    const text = data.content?.[0]?.text || '';
-    const clean = text.replace(/```json|```/g, '').trim();
-    const suggestions = JSON.parse(clean);
-
-    if (!Array.isArray(suggestions) || suggestions.length === 0) throw new Error('No suggestions returned');
-
-    suggestions.forEach(s => {
-      const chip = document.createElement('button');
-      chip.className = 'fn-chip';
-      chip.textContent = s;
-      chip.onclick = () => {
-        document.querySelectorAll('.fn-chip').forEach(c => c.classList.remove('selected'));
-        chip.classList.add('selected');
-        document.getElementById('f-fn').value = s;
-        buildName();
-      };
-      chips.appendChild(chip);
-    });
-
-    results.classList.add('visible');
-  } catch (e) {
-    error.textContent = 'Could not generate suggestions. Type your function name manually above.';
-    error.classList.add('visible');
-  } finally {
-    loading.classList.remove('visible');
-    btn.disabled = false;
-    btn.textContent = 'Suggest →';
-  }
-}
 </script>
 </body>
 </html>
